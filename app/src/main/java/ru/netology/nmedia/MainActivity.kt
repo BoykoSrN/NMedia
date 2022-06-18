@@ -2,41 +2,32 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<PostViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var post = Post(
-            1L,
-            "Sergey",
-            "Привет, это новая Нетология!",
-            "17.06.2022",
-            999,
-            132
-        )
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.render(post)
-        binding.postFavoriteButton.setOnClickListener {
-            post.likedByMe = !post.likedByMe
-            post = if (post.likedByMe) {
-                post.copy(likes = post.likes + 1)
-            } else {
-                post.copy(likes = post.likes - 1)
-            }
+        viewModel.data.observe(this) { post ->
             binding.render(post)
-            binding.postFavoriteButton.setImageResource(getLikeIconResId(post.likedByMe))
+        }
+
+        binding.postLikeButton.setOnClickListener {
+            viewModel.onLikeClicked()
         }
 
         binding.postShareButton.setOnClickListener{
-            post = post.copy(shares = post.shares + 1)
-            binding.render(post)
+            viewModel.onShareClicked()
         }
     }
 
@@ -44,9 +35,9 @@ class MainActivity : AppCompatActivity() {
         author.text = post.author
         content.text = post.content
         published.text = post.published
-        postFavoriteNumber.text = countNumbers(post.likes)
+        postLikeNumber.text = countNumbers(post.likes)
         postShareNumber.text = countNumbers(post.shares)
-        postFavoriteButton.setImageResource(getLikeIconResId(post.likedByMe))
+        postLikeButton.setImageResource(getLikeIconResId(post.likedByMe))
     }
 
     @DrawableRes

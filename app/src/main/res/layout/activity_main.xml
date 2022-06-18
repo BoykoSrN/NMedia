@@ -90,7 +90,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/postFavoriteButton"
+        android:id="@+id/postLikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_favorite_border_24dp"
@@ -98,16 +98,16 @@
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/contentBarrier"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/postFavoriteNumber"
+        app:layout_constraintEnd_toStartOf="@id/postLikeNumber"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/postFavoriteNumber"
+        android:id="@+id/postLikeNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/postFavoriteButton"
+        app:layout_constraintStart_toEndOf="@id/postLikeButton"
         app:layout_constraintTop_toBottomOf="@id/contentBarrier"
-        app:layout_constraintTop_toTopOf="@id/postFavoriteButton"
+        app:layout_constraintTop_toTopOf="@id/postLikeButton"
         android:layout_marginStart="@dimen/min_spacing"
         tools:text="1001"
         />
@@ -118,9 +118,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_share_24dp"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toEndOf="@id/postFavoriteNumber"
+        app:layout_constraintStart_toEndOf="@id/postLikeNumber"
         app:layout_constraintTop_toBottomOf="@id/contentBarrier"
-        app:layout_constraintTop_toTopOf="@id/postFavoriteNumber"
+        app:layout_constraintTop_toTopOf="@id/postLikeNumber"
         android:layout_marginStart="@dimen/common_spacing"
         />
 
