@@ -6,40 +6,46 @@ import ru.netology.nmedia.data.repository.PostRepository
 
 class InMemoryPostRepository : PostRepository {
 
-    override val data = MutableLiveData(Post(
-        1L,
-        "Sergey",
-        "Привет, это новая Нетология!",
-        "17.06.2022",
-        999,
-        132
-    ))
-
-    override fun like() {
-        val currentPost = checkNotNull(data.value) {
-            "Data value should not be null"
+    private var posts
+        get() = checkNotNull(data.value)
+        set(value) {
+            data.value = value
         }
 
-        val likedPost = currentPost.copy(
-            likedByMe = !currentPost.likedByMe
-        )
+    override val data : MutableLiveData<List<Post>>
 
-        data.value = if (likedPost.likedByMe) {
-            likedPost.copy(likes = likedPost.likes + 1)
-        } else {
-            likedPost.copy(likes = likedPost.likes - 1)
+    init {
+        val initialPosts = List(1000) { index ->
+            Post(
+                id = index + 1L,
+                author = "Sergey ${index + 1L}",
+                content = "Пост №$index",
+                published = "29.06.2022",
+                likes = 111
+            )
+        }
+
+        data = MutableLiveData(initialPosts)
+    }
+
+    override fun like(postId: Long) {
+        data.value = posts.map {
+            if (it.id != postId) it
+            else it.copy(likedByMe = !it.likedByMe)
+        }
+        data.value = posts.map {
+            if (it.id == postId) {
+                if (it.likedByMe) it.copy(likes = it.likes + 1)
+                else it.copy(likes = it.likes - 1)
+            } else it
         }
     }
 
-    override fun share() {
-        val currentPost = checkNotNull(data.value) {
-            "Data value should not be null"
+    override fun share(postId: Long) {
+        data.value = posts.map {
+            if (it.id == postId) it.copy(shares = it.shares + 1)
+            else it
         }
-
-        val sharedPost = currentPost.copy(
-            shares = currentPost.shares + 1
-        )
-
-        data.value = sharedPost
     }
+
 }
