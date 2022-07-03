@@ -4,4 +4,10 @@
     <string name="hello">НМедиа!</string>
     <string name="description_post_author_avatar">Аватар автора поста</string>
     <string name="description_post_menu">Меню поста</string>
+    <string name="remove">Удалить</string>
+    <string name="post_text">Текст</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="close_edit">Закрыть редактирование</string>
+    <string name="edit_post_text">Редактировать пост</string>
+    <string name="edit_icon">Редактировать</string>
 </resources>

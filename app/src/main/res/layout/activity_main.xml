@@ -1,10 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/posts_recycler_view"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:context=".MainActivity">
-</androidx.recyclerview.widget.RecyclerView>
+    android:layout_height="match_parent"
+    tools:content=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/posts_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/tools_top_barrier"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/post_list_item" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/tools_top_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="constant_text_edit_view, content_text_view, close_button" />
+
+    <EditText
+        android:id="@+id/content_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="@string/post_text"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/save_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tools_mid_barrier" />
+
+    <ImageButton
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/menu_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/content_edit_text"
+        app:layout_constraintTop_toTopOf="@+id/content_edit_text"
+        app:srcCompat="@drawable/ic_save_24dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/tools_mid_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="content_edit_text, save_button" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/content_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Редактируемый пост"
+        app:layout_constraintBottom_toTopOf="@+id/tools_mid_barrier"
+        app:layout_constraintEnd_toStartOf="@+id/close_button"
+        app:layout_constraintStart_toEndOf="@+id/edit_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/constant_text_edit_view"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/constant_text_edit_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="@string/edit_post_text"
+        android:text="@string/edit_post_text"
+        app:layout_constraintBottom_toTopOf="@+id/content_text_view"
+        app:layout_constraintEnd_toStartOf="@+id/close_button"
+        app:layout_constraintStart_toEndOf="@+id/edit_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/tools_top_barrier"
+        />
+
+    <ImageView
+        android:id="@+id/edit_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="@+id/tools_top_barrier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/content_text_view"
+        android:contentDescription="@string/edit_icon"
+        app:srcCompat="@drawable/ic_edit_24dp"/>
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tools_mid_barrier"
+        app:layout_constraintTop_toTopOf="@+id/tools_top_barrier"
+        app:layout_constraintStart_toEndOf="@+id/content_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_clear_24dp"
+        android:contentDescription="@string/close_edit" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/edit_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tools_top_barrier,constant_text_edit_view, content_text_view, edit_image_view, close_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
