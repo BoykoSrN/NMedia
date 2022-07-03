@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/headerBarrier"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/ic_netology_48dp"
+        app:srcCompat="@drawable/ic_netology_48dp"
         />
 
     <TextView
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        tools:text="Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb" />
+        tools:text="Привет, это новая Нетология!" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/contentBarrier"
