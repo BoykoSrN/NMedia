@@ -40,8 +40,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // ViewModel
-    def liveData_version = "2.4.1"
-    def activity_version = "1.4.0"
+    def liveData_version = "2.5.0"
+    def activity_version = "1.5.0"
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$liveData_version")
     implementation("androidx.activity:activity-ktx:$activity_version")
 }

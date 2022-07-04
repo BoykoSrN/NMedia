@@ -10,4 +10,5 @@
     <string name="close_edit">Закрыть редактирование</string>
     <string name="edit_post_text">Редактировать пост</string>
     <string name="edit_icon">Редактировать</string>
+    <string name="like">Нравится</string>
 </resources>
