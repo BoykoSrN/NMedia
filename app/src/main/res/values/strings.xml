@@ -10,4 +10,7 @@
     <string name="edit_post_text">Edit Post</string>
     <string name="edit_icon">Edit Icon</string>
     <string name="like">Like</string>
+    <string name="save_content">Save</string>
+    <string name="add_new_post">Add post</string>
+    <string name="chooser_share_post">Share</string>
 </resources>

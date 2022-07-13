@@ -21,7 +21,7 @@ class InMemoryPostRepository : PostRepository {
                 author = "Нетология",
                 content = "Пост №$index",
                 published = "30.06.2022",
-                likes = 9999
+                likes = 9999,
             )
         }
     )
