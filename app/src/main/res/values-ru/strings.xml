@@ -10,4 +10,8 @@
     <string name="close_edit">Закрыть редактирование</string>
     <string name="edit_post_text">Редактировать пост</string>
     <string name="edit_icon">Редактировать</string>
+    <string name="like">Нравится</string>
+    <string name="save_content">Сохранить</string>
+    <string name="add_new_post">Добавить пост</string>
+    <string name="chooser_share_post">Поделиться</string>
 </resources>
