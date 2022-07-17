@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val adapter = PostsAdapter(viewModel)
         binding.postsRecyclerView.adapter = adapter
         viewModel.data.observe(this) { posts ->
