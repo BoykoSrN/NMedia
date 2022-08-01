@@ -65,9 +65,9 @@ class ViewHolder(
             author.text = post.author
             content.text = post.content
             published.text = post.published
-            postLikeButton.text = countNumbers(post.likes)
-            postShareButton.text = countNumbers(post.shares)
-            postLikeButton.setIconResource(getLikeIconResId(post.likedByMe))
+            postLikeNumber.text = countNumbers(post.likes)
+            postShareNumber.text = countNumbers(post.shares)
+            postLikeButton.setImageResource(getLikeIconResId(post.likedByMe))
         }
     }
     private fun countNumbers(likes: Int): String {

@@ -91,62 +91,64 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/postLikeButton"
-        style="@style/Widget.AppTheme.LikeCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkable="true"
-        android:contentDescription="@string/like"
-        android:padding="8dp"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="8dp"
-        android:textColor="@color/like_text_color"
-        app:backgroundTint="@color/material_on_surface_stroke"
-        app:cornerRadius="24dp"
-        app:icon="@drawable/ic_like_24dp"
-        app:iconPadding="4dp"
-        app:layout_constraintEnd_toStartOf="@id/postShareButton"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_favorite_border_24dp"
+        android:layout_marginTop="@dimen/min_spacing"
+        app:layout_constraintEnd_toStartOf="@+id/postLikeNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentBarrier"
-        tools:text="213" />
+        app:layout_constraintTop_toBottomOf="@id/contentBarrier" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/postShareButton"
-        style="@style/Widget.AppTheme.ShareButton"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/postLikeNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/contentBarrier"
+        app:layout_constraintTop_toTopOf="@+id/postLikeButton"
+        app:layout_constraintStart_toEndOf="@+id/postLikeButton"
         android:layout_marginStart="@dimen/min_spacing"
-        android:drawablePadding="4dp"
-        android:padding="8dp"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="8dp"
-        android:textColor="#808080"
-        app:backgroundTint="@color/material_on_surface_stroke"
-        app:cornerRadius="24dp"
-        app:icon="@drawable/ic_share_24dp"
-        app:iconPadding="4dp"
-        app:layout_constraintBottom_toBottomOf="@id/postLikeButton"
-        app:layout_constraintStart_toEndOf="@id/postLikeButton"
-        app:layout_constraintTop_toBottomOf="@id/contentBarrier"
-        app:layout_constraintTop_toTopOf="@id/postLikeButton"
-        tools:text="320" />
+        tools:text="100"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/postShareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_share_24dp"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="@dimen/common_spacing"
+        app:layout_constraintEnd_toStartOf="@+id/postShareNumber"
+        app:layout_constraintTop_toBottomOf="@+id/contentBarrier"
+        app:layout_constraintStart_toEndOf="@+id/postLikeNumber"
+        app:layout_constraintTop_toTopOf="@+id/postLikeButton"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/postShareNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/contentBarrier"
+        app:layout_constraintTop_toTopOf="@+id/postShareButton"
+        app:layout_constraintStart_toEndOf="@+id/postShareButton"
+        android:layout_marginStart="@dimen/min_spacing"
+        tools:text="5"
+        />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/postViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/min_spacing"
-        android:background="@android:color/transparent"
         android:src="@drawable/ic_views_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/postShareButton"
-        app:layout_constraintEnd_toStartOf="@id/postViewNumber"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="@+id/postViewNumber"
+        app:layout_constraintEnd_toStartOf="@+id/postViewNumber"
         app:layout_constraintTop_toBottomOf="@id/contentBarrier"
-        app:layout_constraintTop_toTopOf="@id/postShareButton" />
+        android:layout_marginEnd="@dimen/min_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/postViewNumber"
