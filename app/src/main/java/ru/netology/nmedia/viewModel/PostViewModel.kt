@@ -6,19 +6,20 @@ import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.data.impl.InMemoryPostRepository
 import ru.netology.nmedia.data.repository.PostRepository
+import ru.netology.nmedia.util.SingleLiveEvent
 
-class PostViewModel : ViewModel(), PostInteractionListener {
+class PostViewModel:ViewModel(), PostInteractionListener {
 
     private val repository: PostRepository = InMemoryPostRepository()
-
     val data by repository::data
+    val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
+    val navigateToPostScreenEvent = SingleLiveEvent<Long>()
+    private val currentPost = MutableLiveData<Post?>(null)
 
-    val currentPost = MutableLiveData<Post?>(null)
-
-    fun onSaveButtonClick(content:String){
+    fun onSaveButtonClicked(content:String){
         if (content.isBlank()) return
 
-        val post = currentPost.value?.copy(
+        val newPost =currentPost.value?.copy(
             content = content
         )?: Post(
             id = PostRepository.NEW_POST_ID,
@@ -26,25 +27,26 @@ class PostViewModel : ViewModel(), PostInteractionListener {
             content = content,
             published = "Today"
         )
-        repository.save(post)
+        repository.save(newPost)
         currentPost.value = null
     }
 
-    // region PostInteractionListener
-
-    override fun onLikeClicked(post: Post) =
-        repository.like(post.id)
-
-    override fun onShareClicked(post: Post) =
-        repository.share(post.id)
-
-    override fun onDeleteClicked(post: Post) =
-        repository.delete(post.id)
-
-    override fun onEditClicked(post: Post) {
-        currentPost.value = post
+    fun onAddClicked(){
+        navigateToPostContentScreenEvent.call()
     }
 
-    // endregion PostInteractionListener
+    override fun onPostClicked(post: Post){
+        navigateToPostScreenEvent.value = post.id
+    }
 
+    // region PostInteractionsListener
+
+    override fun onShareClicked(post:Post) = repository.share(post.id)
+    override fun onLikeClicked(post:Post) = repository.like(post.id)
+    override fun onDeleteClicked(post:Post) = repository.delete(post.id)
+    override fun onEditClicked(post: Post) {
+        currentPost.value = post
+        navigateToPostContentScreenEvent.value = post.content}
+
+    // endregion PostInteractionsListener
 }

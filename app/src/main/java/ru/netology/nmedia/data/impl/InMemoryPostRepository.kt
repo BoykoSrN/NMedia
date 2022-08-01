@@ -1,27 +1,26 @@
 package ru.netology.nmedia.data.impl
 
+
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.data.repository.PostRepository
 
 class InMemoryPostRepository : PostRepository {
-
     private var nextId = GENERATED_POST_AMOUNT.toLong()
 
-    private var posts
-        get() = checkNotNull(data.value)
-        set(value) {
-            data.value = value
+    private val posts
+        get() = checkNotNull(data.value) {
+            "Data value not be null"
         }
 
     override val data = MutableLiveData(
         List(GENERATED_POST_AMOUNT) { index ->
             Post(
                 id = index + 1L,
-                author = "Нетология",
-                content = "Пост №$index",
-                published = "30.06.2022",
-                likes = 9999
+                author = "Netology",
+                content = "Some random content $index",
+                published = "01.08.2022",
+                likes = 999
             )
         }
     )
@@ -29,44 +28,40 @@ class InMemoryPostRepository : PostRepository {
     override fun like(postId: Long) {
         data.value = posts.map {
             if (it.id != postId) it
-            else it.copy(likedByMe = !it.likedByMe)
-        }
-        data.value = posts.map {
-            if (it.id == postId) {
-                if (it.likedByMe) it.copy(likes = it.likes + 1)
-                else it.copy(likes = it.likes - 1)
-            } else it
+            else {
+                if (it.likedByMe) it.copy(likes = it.likes - 1, likedByMe = !it.likedByMe)
+                else it.copy(likes = it.likes + 1, likedByMe = !it.likedByMe)
+            }
         }
     }
 
     override fun share(postId: Long) {
         data.value = posts.map {
-            if (it.id == postId) it.copy(shares = it.shares + 1)
-            else it
+            if (it.id != postId) it
+            else it.copy(shares = it.shares + 1)
         }
     }
 
     override fun delete(postId: Long) {
-        data.value = posts.filter { postId != it.id }
-
+        data.value = posts.filter { it.id != postId }
     }
 
     override fun save(post: Post) {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
-    private fun update(post: Post) {
-        data.value = posts.map {
-            if(it.id == post.id) post else it
-        }
-    }
-
-    private fun insert(post:Post) {
+    private fun insert(post:Post){
         data.value = listOf(
             post.copy(
-                id = ++nextId
+                id =++nextId
             )
         ) + posts
+    }
+
+    private fun update(post: Post) {
+        data.value = posts.map{
+            if(it.id == post.id) post else it
+        }
     }
 
     private companion object {
