@@ -26,7 +26,7 @@ class FeedFragment : Fragment() {
             val newPostContent = bundle.getString(
                 PostContentFragment.RESULT_KEY
             ) ?: return@setFragmentResultListener
-            viewModel.onSaveButtonClick(newPostContent)
+            viewModel.onSaveButtonClicked(newPostContent)
         }
 
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
